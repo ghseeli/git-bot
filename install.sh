@@ -32,6 +32,3 @@ if [ ! -d $DIR/../axel-bot-$WORKING_REPO ]; then
 	git config user.email $GIT_EMAIL
 fi
 
-
-
-
