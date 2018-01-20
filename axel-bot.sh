@@ -1,11 +1,10 @@
 #!/bin/bash
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-
-source config.bash
+source "$DIR/config.bash"
 
 # If user did not supply path, ask for one
-if [ -z "$NEWFILEPATH" ]; then
-	read -p "Enter new file path: " NEWFILEPATH
+if [ -z "$NEWFILE_PATH" ]; then
+	read -p "Enter new file path: " NEWFILE_PATH
 fi
 
 cd "$LOCAL_REPO_PATH"
@@ -22,11 +21,11 @@ git pull axel-bot master
 
 # Add the file to AxelBot's local repo, and commit.
 if [ "$GOBBLE_SOURCE_FILE" = true ]; then
-	mv "$NEWFILEPATH" "$RELFILEPATH"
+	mv "$NEWFILE_PATH" "$REPOFILE_PATH"
 else
-	cp "$NEWFILEPATH" "$RELFILEPATH"
+	cp "$NEWFILE_PATH" "$REPOFILE_PATH"
 fi
-git add "$RELFILEPATH"
+git add "$REPOFILE_PATH"
 git commit -m "Newest update to $UPSTREAM_REPO_NAME."
 
 # Push, and if pull-request mode is enabled, make a pull request.

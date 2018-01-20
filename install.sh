@@ -1,7 +1,6 @@
 #!/bin/bash
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-
-source config.bash
+source "$DIR/config.bash"
 
 # Setup AxelBot's ssh key
 if [ ! -f ~/.ssh/id_rsa.axel-bot ]; then

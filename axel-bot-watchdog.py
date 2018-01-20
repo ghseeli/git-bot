@@ -8,15 +8,9 @@ import subprocess
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 
-# config
-DIR = os.path.dirname(os.path.abspath(__file__))
-PARENT_DIR = os.path.dirname(DIR)
-UPSTREAM_REPO_NAME = "Integrable-Probability-Working-Seminar"
-LOCAL_REPO_NAME = "axel-bot-{}".format(UPSTREAM_REPO_NAME)
-LOCAL_REPO_PATH=os.path.join(PARENT_DIR, LOCAL_REPO_NAME)
-# WATCH_PATH = "/root/Dropbox/[Spring 18] Integrable Probability Working Seminar"
-WATCH_PATH="/Users/Matthew/Dropbox (Personal)/[Spring 18] Integrable Probability Working Seminar"
-NEWFILEPATH="/Users/Matthew/Dropbox (Personal)/[Spring 18] Integrable Probability Working Seminar/website.md"
+# Load config vars
+DIR_PATH_TO_WATCH=subprocess.check_output('source config.bash && printf "$NEWFILE_DIR_PATH"', shell=True).strip()
+FILE_PATH_TO_WATCH=subprocess.check_output('source config.bash && printf "$NEWFILE_PATH"', shell=True).strip()
 
 
 class FileUpdateEventHandler (FileSystemEventHandler):
@@ -34,7 +28,7 @@ class FileUpdateEventHandler (FileSystemEventHandler):
         print('The event is: "' + str(event) + '".')
         print(event.src_path)
         print(type(event.src_path))
-        if event.src_path == NEWFILEPATH:
+        if event.src_path == FILE_PATH_TO_WATCH:
             print('Found a new or modified file of interest.  Executing axel-bot...')
             try:
                 print('about to subprocess.')
@@ -50,7 +44,7 @@ if __name__ == "__main__":
     event_handler = FileUpdateEventHandler()
     observer = Observer()
     print('I start watch')
-    observer.schedule(event_handler, WATCH_PATH, recursive=True)
+    observer.schedule(event_handler, DIR_PATH_TO_WATCH, recursive=True)
     observer.start()
     try:
         while True:
