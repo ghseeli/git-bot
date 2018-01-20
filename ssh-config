@@ -1,5 +1,5 @@
-Host github-as-richard-bot
+Host github-as-axel-bot
      HostName github.com
      User git
-     IdentityFile ~/.ssh/id_rsa.richard-bot
+     IdentityFile ~/.ssh/id_rsa.axel-bot
      IdentitiesOnly yes

@@ -3,32 +3,32 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # User customizable vars
 WORKING_REPO="grad-school-notes"
-GIT_EMAIL="ghseeli+richardbot@gmail.com"
+GIT_EMAIL="ghseeli+axelbot@gmail.com"
 
-# Setup RichardBot's ssh key
-if [ ! -f ~/.ssh/id_rsa.richard-bot ]; then
-    if [ -f $DIR/id_rsa.richard-bot ]; then
-	# Setup RichardBot's identity.
-	cp $DIR/id_rsa.richard-bot ~/.ssh/id_rsa.richard-bot
-	chmod 600 ~/.ssh/id_rsa.richard-bot
+# Setup AxelBot's ssh key
+if [ ! -f ~/.ssh/id_rsa.axel-bot ]; then
+    if [ -f $DIR/id_rsa.axel-bot ]; then
+	# Setup AxelBot's identity.
+	cp $DIR/id_rsa.axel-bot ~/.ssh/id_rsa.axel-bot
+	chmod 600 ~/.ssh/id_rsa.axel-bot
 	if [ -e ~/.ssh/config ]; then
 	    cp  ~/.ssh/config ~/.ssh/config.backup
 	fi
-	ssh-keygen -y -f ~/.ssh/id_rsa.richard-bot > ~/.ssh/id_rsa.richard-bot.pub
+	ssh-keygen -y -f ~/.ssh/id_rsa.axel-bot > ~/.ssh/id_rsa.axel-bot.pub
 	cat $DIR/ssh-config >> ~/.ssh/config
     else
-	printf "Please make sure you get a copy of RichardBot's key and add it to this directory named as id_rsa.richard-bot"
+	printf "Please make sure you get a copy of AxelBot's key and add it to this directory named as id_rsa.axel-bot"
 	exit 1
     fi
 fi
-if [ ! -d $DIR/../richard-bot-$WORKING_REPO ]; then
-	# Initialize RichardBot's copy of the notes.
-	mkdir $DIR/../richard-bot-$WORKING_REPO
-	cd  $DIR/../richard-bot-$WORKING_REPO
+if [ ! -d $DIR/../axel-bot-$WORKING_REPO ]; then
+	# Initialize AxelBot's copy of the notes.
+	mkdir $DIR/../axel-bot-$WORKING_REPO
+	cd  $DIR/../axel-bot-$WORKING_REPO
 	git init
-	git remote add richard-bot git@github-as-richard-bot:RichardBot/$WORKING_REPO.git
-	git pull richard-bot master
-	git config user.name "Richard Bot"
+	git remote add axel-bot git@github-as-axel-bot:AxelBot/$WORKING_REPO.git
+	git pull axel-bot master
+	git config user.name "Axel Bot"
 	git config user.email $GIT_EMAIL
 fi
 
