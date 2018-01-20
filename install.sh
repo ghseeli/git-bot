@@ -1,16 +1,7 @@
 #!/bin/bash
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-# User customizable vars
-UPSTREAM_REPO_OWNER="MareoRaft"
-UPSTREAM_REPO_NAME="Integrable-Probability-Working-Seminar"
-BOT_USERNAME_GIT="Axel Bot"
-BOT_EMAIL_GIT="matthewmatics314@gmail.com"
-
-# Other vars
-UPSTREAM_REPO_SSH_ADDRESS="git@github-as-axel-bot:$UPSTREAM_REPO_OWNER/$UPSTREAM_REPO_NAME.git"
-echo "$UPSTREAM_REPO_SSH_ADDRESS"
-LOCAL_REPO_PATH="$DIR/../axel-bot-$UPSTREAM_REPO_NAME"
+source config.bash
 
 # Setup AxelBot's ssh key
 if [ ! -f ~/.ssh/id_rsa.axel-bot ]; then

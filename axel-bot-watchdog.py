@@ -14,8 +14,9 @@ PARENT_DIR = os.path.dirname(DIR)
 UPSTREAM_REPO_NAME = "Integrable-Probability-Working-Seminar"
 LOCAL_REPO_NAME = "axel-bot-{}".format(UPSTREAM_REPO_NAME)
 LOCAL_REPO_PATH=os.path.join(PARENT_DIR, LOCAL_REPO_NAME)
-print(LOCAL_REPO_PATH)
-WATCH_PATH = "/root/Dropbox/[Spring 18] Integrable Probability Working Seminar"
+# WATCH_PATH = "/root/Dropbox/[Spring 18] Integrable Probability Working Seminar"
+WATCH_PATH="/Users/Matthew/Dropbox (Personal)/[Spring 18] Integrable Probability Working Seminar"
+NEWFILEPATH="/Users/Matthew/Dropbox (Personal)/[Spring 18] Integrable Probability Working Seminar/website.md"
 
 
 class FileUpdateEventHandler (FileSystemEventHandler):
@@ -32,11 +33,13 @@ class FileUpdateEventHandler (FileSystemEventHandler):
     def on_created_or_modified(self, event):
         print('The event is: "' + str(event) + '".')
         print(event.src_path)
-        if re.search(r'website\.md$', event.src_path):
+        print(type(event.src_path))
+        if event.src_path == NEWFILEPATH:
             print('Found a new or modified file of interest.  Executing axel-bot...')
             try:
                 print('about to subprocess.')
-                print(subprocess.check_output(['./axel-bot.sh', str(event.src_path)], shell=True))
+                output = subprocess.check_output('./axel-bot.sh', shell=True)
+                print(output)
             except Exception as e:
                 print(e)
 
