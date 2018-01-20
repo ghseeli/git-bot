@@ -15,6 +15,8 @@ UPSTREAM_REPO_NAME = "Integrable-Probability-Working-Seminar"
 LOCAL_REPO_NAME = "axel-bot-{}".format(UPSTREAM_REPO_NAME)
 LOCAL_REPO_PATH=os.path.join(PARENT_DIR, LOCAL_REPO_NAME)
 print(LOCAL_REPO_PATH)
+WATCH_PATH = "/root/Dropbox/[Spring 18] Integrable Probability Working Seminar"
+
 
 class FileUpdateEventHandler (FileSystemEventHandler):
 
@@ -34,7 +36,7 @@ class FileUpdateEventHandler (FileSystemEventHandler):
             print('Found a new or modified file of interest.  Executing axel-bot...')
             try:
                 print('about to subprocess.')
-                print(subprocess.check_output('axel-bot.sh ' + str(event.src_path), shell=True))
+                print(subprocess.check_output(['./axel-bot.sh', str(event.src_path)], shell=True))
             except Exception as e:
                 print(e)
 
@@ -45,7 +47,7 @@ if __name__ == "__main__":
     event_handler = FileUpdateEventHandler()
     observer = Observer()
     print('I start watch')
-    observer.schedule(event_handler, LOCAL_REPO_PATH, recursive=True)
+    observer.schedule(event_handler, WATCH_PATH, recursive=True)
     observer.start()
     try:
         while True:

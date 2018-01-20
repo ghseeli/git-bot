@@ -8,6 +8,7 @@ UPSTREAM_REPO_OWNER="MareoRaft"
 UPSTREAM_REPO_NAME="Integrable-Probability-Working-Seminar"
 BOT_USERNAME_GIT="Axel Bot"
 BOT_EMAIL_GIT="matthewmatics314@gmail.com"
+NEWFILEPATH=$1
 RELFILEPATH="./README.md" # the file to be changed, relative to the repo
 
 # Other vars
