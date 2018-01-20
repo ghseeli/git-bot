@@ -1,6 +1,10 @@
 #!/bin/bash
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+# User customizable vars
+WORKING_REPO="grad-school-notes"
+GIT_EMAIL="ghseeli+richardbot@gmail.com"
+
 # Setup RichardBot's ssh key
 if [ ! -f ~/.ssh/id_rsa.richard-bot ]; then
     if [ -f $DIR/id_rsa.richard-bot ]; then
@@ -17,15 +21,15 @@ if [ ! -f ~/.ssh/id_rsa.richard-bot ]; then
 	exit 1
     fi
 fi
-if [ ! -d $DIR/../richard-bot-grad-school-notes ]; then
+if [ ! -d $DIR/../richard-bot-$WORKING_REPO ]; then
 	# Initialize RichardBot's copy of the notes.
-	mkdir $DIR/../richard-bot-grad-school-notes
-	cd  $DIR/../richard-bot-grad-school-notes
+	mkdir $DIR/../richard-bot-$WORKING_REPO
+	cd  $DIR/../richard-bot-$WORKING_REPO
 	git init
-	git remote add richard-bot git@github-as-richard-bot:RichardBot/grad-school-notes.git
+	git remote add richard-bot git@github-as-richard-bot:RichardBot/$WORKING_REPO.git
 	git pull richard-bot master
 	git config user.name "Richard Bot"
-	git config user.email "ghseeli+richardbot@gmail.com"
+	git config user.email $GIT_EMAIL
 fi
 
 
