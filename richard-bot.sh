@@ -1,7 +1,7 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-NEWFILEPATH=$1
-RELFILEPATH="./Axels Algebra II/axels-algebra-book-ii.tex" # the file to be changed, relative to the repo
-WORKING_REPO="grad-school-notes"
+NEWFILEPATH="/root/Dropbox/[Spring 18] Integrable Probability Working Seminar/website.md"
+RELFILEPATH="./README.md" # the file to be changed, relative to the repo
+WORKING_REPO="Integrable-Probability-Working-Seminar"
 
 # If user did not supply path, ask for one
 if [ -z "$NEWFILEPATH" ]
@@ -25,7 +25,7 @@ git pull axel-bot master
 # Add the file to AxelBot's $WORKING_REPO repo, and commit
 mv "$NEWFILEPATH" "$RELFILEPATH"
 git add "$RELFILEPATH"
-git commit -m "Newest updates of Axel's notes"
+git commit -m "Newest update to $WORKING_REPO."
 
 # Push and make a pull request
 git push axel-bot master

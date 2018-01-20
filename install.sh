@@ -2,8 +2,8 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # User customizable vars
-WORKING_REPO="grad-school-notes"
-GIT_EMAIL="ghseeli+axelbot@gmail.com"
+WORKING_REPO="Integrable-Probability-Working-Seminar"
+GIT_EMAIL="matthewmatics314@gmail.com"
 
 # Setup AxelBot's ssh key
 if [ ! -f ~/.ssh/id_rsa.axel-bot ]; then
