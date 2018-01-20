@@ -1,38 +1,56 @@
+#!/bin/bash
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-NEWFILEPATH="/root/Dropbox/[Spring 18] Integrable Probability Working Seminar/website.md"
+
+# User customizable vars
+PULL_REQUEST_MODE=false
+GOBBLE_SOURCE_FILE=false
+UPSTREAM_REPO_OWNER="MareoRaft"
+UPSTREAM_REPO_NAME="Integrable-Probability-Working-Seminar"
+BOT_USERNAME_GIT="Axel Bot"
+BOT_EMAIL_GIT="matthewmatics314@gmail.com"
 RELFILEPATH="./README.md" # the file to be changed, relative to the repo
-WORKING_REPO="Integrable-Probability-Working-Seminar"
+
+# Other vars
+UPSTREAM_REPO_SSH_ADDRESS="git@github-as-axel-bot:$UPSTREAM_REPO_OWNER/$UPSTREAM_REPO_NAME.git"
+LOCAL_REPO_NAME="axel-bot-$UPSTREAM_REPO_NAME"
+LOCAL_REPO_PATH="$DIR/../$LOCAL_REPO_NAME"
+
 
 # If user did not supply path, ask for one
-if [ -z "$NEWFILEPATH" ]
-	then
+if [ -z "$NEWFILEPATH" ]; then
 	read -p "Enter new file path: " NEWFILEPATH
 fi
 
-cd $DIR/../axel-bot-$WORKING_REPO
+cd "$LOCAL_REPO_PATH"
 
 # Detect if there are unstaged changes.  If so, fail.  Otherwise, switch to master!
-if [ ! -z "$(git diff --raw)" ]
-	then
-	printf "There are unstaged changes to axel-bot-$WORKING_REPO\!  There really shouldn't be ANY changes there\!  Axel's newest file should be inputted as a path.  Extra changes to notes should be made on the MAIN repository, not AxelBot's repository."
+if [ ! -z "$(git diff --raw)" ]; then
+	printf "There are unstaged changes to $LOCAL_REPO_NAME\!  There really shouldn't be ANY changes there\!  Axel's newest file should be inputted as a path.  Extra changes to notes should be made on the MAIN repository, not AxelBot's repository."
 	return 1
 fi
 git checkout master
 
-# Update AxelBot's $WORKING_REPO repo to newest version
+# Update AxelBot's local repo to newest version of upstream repo.
 git pull axel-bot master
 
-# Add the file to AxelBot's $WORKING_REPO repo, and commit
-mv "$NEWFILEPATH" "$RELFILEPATH"
+# Add the file to AxelBot's local repo, and commit.
+if [ "$GOBBLE_SOURCE_FILE" = true ]; then
+	mv "$NEWFILEPATH" "$RELFILEPATH"
+else
+	cp "$NEWFILEPATH" "$RELFILEPATH"
+fi
 git add "$RELFILEPATH"
-git commit -m "Newest update to $WORKING_REPO."
+git commit -m "Newest update to $UPSTREAM_REPO_NAME."
 
-# Push and make a pull request
+# Push, and if pull-request mode is enabled, make a pull request.
 git push axel-bot master
-CURR_DATETIME=$(date +%Y%m%d%H%M%s)
-git checkout -b pr/$CURR_DATETIME
-git push -u axel-bot pr/$CURR_DATETIME
-hub pull-request -b ghseeli/$WORKING_REPO:master -h AxelBot/$WORKING_REPO:pr/$CURR_DATETIME -m "Absofruitly."
-git checkout master
+if [ "$PULL_REQUEST_MODE" = true ]; then
+	printf "Creating pull request branch and pull request.\n"
+	CURR_DATETIME=$(date +%Y%m%d%H%M%s)
+	git checkout -b pr/$CURR_DATETIME
+	git push -u axel-bot pr/$CURR_DATETIME
+	hub pull-request -b $UPSTREAM_REPO_OWNER/$UPSTREAM_REPO:master -h AxelBot/$UPSTREAM_REPO:pr/$CURR_DATETIME -m "Absofruitly."
+	git checkout master
+fi
 
 printf "beep beep boop."

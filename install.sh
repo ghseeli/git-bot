@@ -2,8 +2,15 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 # User customizable vars
-WORKING_REPO="Integrable-Probability-Working-Seminar"
-GIT_EMAIL="matthewmatics314@gmail.com"
+UPSTREAM_REPO_OWNER="MareoRaft"
+UPSTREAM_REPO_NAME="Integrable-Probability-Working-Seminar"
+BOT_USERNAME_GIT="Axel Bot"
+BOT_EMAIL_GIT="matthewmatics314@gmail.com"
+
+# Other vars
+UPSTREAM_REPO_SSH_ADDRESS="git@github-as-axel-bot:$UPSTREAM_REPO_OWNER/$UPSTREAM_REPO_NAME.git"
+echo "$UPSTREAM_REPO_SSH_ADDRESS"
+LOCAL_REPO_PATH="$DIR/../axel-bot-$UPSTREAM_REPO_NAME"
 
 # Setup AxelBot's ssh key
 if [ ! -f ~/.ssh/id_rsa.axel-bot ]; then
@@ -21,14 +28,14 @@ if [ ! -f ~/.ssh/id_rsa.axel-bot ]; then
 	exit 1
     fi
 fi
-if [ ! -d $DIR/../axel-bot-$WORKING_REPO ]; then
+if [ ! -d "$LOCAL_REPO_PATH" ]; then
 	# Initialize AxelBot's copy of the notes.
-	mkdir $DIR/../axel-bot-$WORKING_REPO
-	cd  $DIR/../axel-bot-$WORKING_REPO
-	git init
-	git remote add axel-bot git@github-as-axel-bot:AxelBot/$WORKING_REPO.git
+	# In THIS implementation, AxelBot has a clone of the $UPSTREAM_REPO and commits directly to it, as opposed to RichardBot who had his own repo on his own account, and then made pull requests.
+	git clone "$UPSTREAM_REPO_SSH_ADDRESS" "$LOCAL_REPO_PATH"
+	cd "$LOCAL_REPO_PATH"
+	git remote add axel-bot "$UPSTREAM_REPO_SSH_ADDRESS"
 	git pull axel-bot master
-	git config user.name "Axel Bot"
-	git config user.email $GIT_EMAIL
+	git config user.name "$BOT_USERNAME_GIT"
+	git config user.email "$BOT_EMAIL_GIT"
 fi
 
