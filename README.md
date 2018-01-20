@@ -1,19 +1,33 @@
-# Axel Bot
+Mojdeh Tarighat, Matthew Lancellotti, Arun Kannan, Ramanujan Santharoubane, and Axel Saenz.
 
-This code powers @AxelBot 's internals, allowing it to create pull requests a repository of your choice, $WORKING_REPO.
+1234567891011121314
 
-## Directions/Usage
+## Schedule of Talks, Spring 2018
 
-Assuming you already have the repository, and have installed everything, do the following:
+Date ↓ | # | Topic | Content | Lecturer
+-------|:-:|-------|---------|---------
+Jan 25 | 1 | Determinantal and Schur Processes |  | Mojdeh
+Feb 01 | 4 | ASEP on the Line and the Bethe Ansatz |  | Matt
+Feb 08 | 3 | TASEP on the Line and Determinantal Formulas |  | Arun
+Feb 15 |  |  |  | Axel
+Feb 22 | 2 | Random Matrices and Determinantal Structure |  | Mojdeh
+Mar 01 | 6 | Non-Intersecting Brownian Motion on the Unit Circle |  | Matt
+Mar 15 |  |  |  | 
+Mar 22 |  |  |  | 
+Mar 29 |  |  |  | 
+Apr 05 |  |  |  | 
+Apr 12 |  |  |  | 
+Apr 19 |  |  |  | 
+Apr 26 |  |  |  | 
 
-  1. `cd` into the repository, usually named `axel-bot`
-  2. `./axel-bot.sh`
-  3. beep happily
 
-## Installation/Requirements
+## Unscheduled Talks
 
-This code is designed to work on a UNIX based system with git and the github CLI `hub`. Everything except hub can be set up by running `install.sh` if you have a copy of @AxelBot's private key.
-
-## How it works
-
-@AxelBot maintains a fork of the $WORKING_REPO repository where it put's changes. Then, it will create a pull request into $WORKING_REPO by running `axel-bot.sh`
+ #↓| Topic | Content | Lecturer
+:-:|-------|---------|---------
+ 5 | Bethe Ansatz for ASEP on the Ring |  | 
+ 7 | Orthogonal Polynomials and Applications to Determinantal Processes |  | Arun
+ 8 | Riemann-Hilbert Problems and Applications to Asymptotic Analysis |  | Mojdeh
+ 9 | Eyenard-Orantin Topological Recursion and the Generalized Catalan Numbers |  | 
+10 | Higgs Bundles |  | 
+11 | Eyenard-Orantin Topological Recursion and the Higgs Bundles |  | 
