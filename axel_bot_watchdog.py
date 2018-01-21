@@ -27,9 +27,9 @@ class FileUpdateEventHandler (FileSystemEventHandler):
     def on_created_or_modified(self, event):
         print('The event is: "' + str(event) + '".')
         if event.src_path == FILE_PATH_TO_WATCH:
-            print('The file of interest has been altered!  Executing axel-bot...')
+            print('The file of interest has been altered!  Executing git-bot...')
             try:
-                output = subprocess.check_output('./axel-bot.sh', shell=True)
+                output = subprocess.check_output('./git-bot.bash', shell=True)
                 print(output)
             except Exception as e:
                 print(e)
