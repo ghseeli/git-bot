@@ -1,19 +1,39 @@
 #!/bin/bash
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-# User customizable vars
+# USER CUSTOMIZABLE VARIABLES
+# If true, the git-bot will be commiting to his own copy of the repo, and opening a pull request for his changes to be merged onto the main repo.  If false, the git-bot will commit directly to the main repo without human intervention.
 PULL_REQUEST_MODE=false
-GOBBLE_SOURCE_FILE=false
-UPSTREAM_REPO_OWNER="MareoRaft"
-UPSTREAM_REPO_NAME="Integrable-Probability-Working-Seminar"
-BOT_NAME="git-bot" # The name of YOUR bot.  You should rename this from 'git-bot' to something else especially if you plan on having more than one GitBot.  This will be used in file names and shell scripts, so it is recommended to only use letters, numbers, dashes, and underscores.
-BOT_USERNAME_GITHUB="GitBot" # The username of YOUR bot's GitHub account, which you must create manually.  You must change this accordingly.
-BOT_USERNAME_GIT="GitBot" # git username, preferably the same as above
-BOT_EMAIL_GIT="matthewmatics314@gmail.com" # git email address, preferably the same as above
-# NEWFILE_DIR_PATH="/root/Dropbox/[Spring 18] Integrable Probability Working Seminar"
-NEWFILE_DIR_PATH="/Users/Matthew/Dropbox (Personal)/[Spring 18] Integrable Probability Working Seminar"
-NEWFILE_NAME="website.md"
-REPOFILE_PATH_REL="./README.md" # the file to be changed, relative to the repo
+
+# If true, the new input file to commit will be deleted from its source location.  If false, the input file will be left intact.
+GOBBLE_SOURCE_FILE=true
+
+# The GitHub username of the owner of the main repo
+UPSTREAM_REPO_OWNER="ghseeli"
+
+# The name of the main repo
+UPSTREAM_REPO_NAME="grad-school-notes"
+
+# The name of YOUR bot.  You should rename this from 'git-bot' to something else especially if you plan on having more than one GitBot.  This will be used in file names and shell scripts, so it is recommended to only use letters, numbers, dashes, and underscores.
+BOT_NAME="richard-bot"
+
+# The username of YOUR bot's GitHub account, which you must create manually.  You must change this accordingly.
+BOT_USERNAME_GITHUB="RichardBot"
+
+# git username, preferably the same as above
+BOT_USERNAME_GIT="Richard Bot"
+
+# git email address, preferably the same as the GitHub email address for your git-bot
+BOT_EMAIL_GIT="ghseeli+richardbot@gmail.com"
+
+# The path of the directory that contains the file that will be changed.  You can comment this out if you want the user to input the file path manually.
+# NEWFILE_DIR_PATH="/Users/Matthew/Dropbox (Personal)/[Spring 18] Integrable Probability Working Seminar"
+
+# The name of the file that will be changed (the source one).  You can comment this out if you want the user to input the file path manually.
+# NEWFILE_NAME="website.md"
+
+# The file to be changed (in the main repo), relative to the repo.
+REPOFILE_PATH_REL="./README.md"
 
 
 # Other vars
