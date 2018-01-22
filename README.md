@@ -1,19 +1,25 @@
-# Axel Bot
+# Git Bot
 
-This code powers @AxelBot's internals, allowing it to edit a repository of your choice.
+This code is a generalization to power bots like @RichardBot, allowing it to edit a repository.
+
+## Installation/Requirements
+
+1. Create a GitHub account for your bot.
+2. Create a public/private key pair for your bot.
+3. Clone the repo onto the computer where you want the bot to run.
+4. Put the private key into the root of the repo (but don't commit it).
+5. Install the GitHub CLI `hub`.
+6. Run `install.bash`.
 
 ## Directions/Usage
 
 Assuming you already have the repository, and have installed everything, do the following:
 
-  1. `cd` into the repository, usually named `axel-bot`
-  2. Run `./axel-bot.sh` for a single run, or `python2.7 ./axel-bot-watchdog.py` to have axel-bot run every time the file is changed.
-  3. beep happily
+  1. `cd` into the cloned repository.
+  2. Run `git-bot.bash` for a single run, or `python2.7 git_bot_watchdog.py` to have your bot run every time the file is changed.
+  3. beep happily.
 
-## Installation/Requirements
-
-This code is designed to work on a UNIX based system with git and the github CLI `hub`. Everything except hub can be set up by running `install.sh` if you have a copy of @AxelBot's private key.
 
 ## How it works
 
-@AxelBot maintains a fork of the $WORKING_REPO repository where it put's changes. Then, it will create a pull request into $WORKING_REPO by running `axel-bot.sh`
+For example, @RichardBot maintains a fork of the ghseeli/grad-school-notes repository where it put's changes. Then, it will create a pull request into ghseeli/grad-school-notes by running `richard-bot.sh`.
