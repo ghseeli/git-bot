@@ -1,6 +1,7 @@
 import sys
 import os
 import time
+from datetime import datetime
 import logging
 import re
 import subprocess
@@ -25,7 +26,8 @@ class FileUpdateEventHandler (FileSystemEventHandler):
         return self.on_created_or_modified(event)
 
     def on_created_or_modified(self, event):
-        print('The event is: "' + str(event) + '".')
+        print('The event is: ' + str(event) + '.')
+        print('The time is: ' + str(datetime.now()) + '.')
         if event.src_path == FILE_PATH_TO_WATCH:
             print('The file of interest has been altered!  Executing git-bot...')
             try:
@@ -45,7 +47,7 @@ if __name__ == "__main__":
     observer.start()
     try:
         while True:
-            time.sleep(0.5)
+            time.sleep(2) # in seconds
     except KeyboardInterrupt:
         observer.stop()
     observer.join()

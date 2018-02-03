@@ -39,4 +39,6 @@ if [ "$PULL_REQUEST_MODE" = true ]; then
 	git checkout master
 fi
 
-printf "beep beep boop."
+printf "\n"
+date
+printf "beep beep boop.\n"
